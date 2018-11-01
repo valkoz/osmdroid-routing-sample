@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.example.valkoz.routeexample"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext {
+    osmdroid_version = "6.0.2"
+    support_version = "28.0.0"
+    osm_bonuspack_version = "6.5.2"
+    rxKotlinVersion = "2.2.0"
+    rxAndroidVersion = "2.0.2"
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$support_version"
+
+    // osmdroid
+    implementation "org.osmdroid:osmdroid-android:$osmdroid_version"
+    implementation ("com.github.MKergall:osmbonuspack:$osm_bonuspack_version") {
+        exclude group: 'com.android.support'
+    }
+
+    // RxKotlin & RxAndroid
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+}
